@@ -2,24 +2,12 @@
 //
 
 #include <iostream>
-#include"NoiseMaker.h"
+#include"SoundEngine.h"
 
 using namespace std;
 
-atomic<double> dFrequencyOutput = 0.0;
 
-double MakeNoise(double dTime) {
 
-    double dOutput = 1.0 * sin(dFrequencyOutput * 2.0 * 3.14159 * dTime);
-
-    if (dOutput > 0.0) {
-        return 0.1;
-    }
-    else {
-        return -0.1;
-    }
-
-}
 
 int main()
 {
@@ -34,30 +22,14 @@ int main()
     olcNoiseMaker<short> sound(devices[0], 44100, 1, 8, 512);
     sound.SetUserFunction(MakeNoise);
 
-
-    // this is the base frequency a A2
-    double dBaseOctaveFrequency = 110.0; //A2
-
-    //there is usually 12 semi tons in one octave
-    double semitonRatio = pow(2.0, 1.0 / 12.0);
-    cout << semitonRatio << '\n';
-    
-
     while(1){
-
-        // add a keyboard like a piano
-        bool bKeyPressed = false;
-        for (int i = 0; i < 15; i++) {
-            if (GetAsyncKeyState((unsigned char)("ZSXCFVGBNJMK\xbcl\xbe"[i])) & 0x8000) {
-                dFrequencyOutput = dBaseOctaveFrequency * pow(semitonRatio, i);
-                cout << pow(semitonRatio, i) << '\n';
-                cout << dFrequencyOutput << '\n';
-                bKeyPressed = true;
-            }
+        if (GetAsyncKeyState('A') & 0x8000) {
+            dFrequencyOutput = 440.0;
         }
-        if(!bKeyPressed) {
+        else {
             dFrequencyOutput = 0.0;
         }
+
     }
 
     return 0;

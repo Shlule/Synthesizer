@@ -140,10 +140,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="SoundEngine.cpp" />
     <ClCompile Include="synthe.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NoiseMaker.h" />
+    <ClInclude Include="SoundEngine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
