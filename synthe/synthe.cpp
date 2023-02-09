@@ -10,6 +10,7 @@
 #include"InstrumentDrumhithat.h"
 #include"InstrumentDrumkick.h"
 #include"InstrumentDrumsnare.h"
+#include"sequencer.h"
 using namespace std;
 
 #define FTYPE double
@@ -218,6 +219,7 @@ synth::Harmonica harmonica;
 InstrumentHarmonica harmonicas;
 InstrumentDrumsnare drumsnare;
 InstrumentDrumkick drumkick;
+InstrumentDrumhithat drumhithat;
 
 
 
@@ -293,9 +295,41 @@ int main()
 	auto clock_old_time = chrono::high_resolution_clock::now();
 	auto clock_real_time = chrono::high_resolution_clock::now();
 	double dElapsedTime = 0.0;
+	double dWallTime = 0.0;
+
+	// Establish Sequencer
+	Sequencer seq(90.0);
+	seq.addInstrument(&drumkick);
+	seq.addInstrument(&drumsnare);
+	seq.addInstrument(&drumhithat);
+
+	seq.vecChannel.at(0).sbeat = L"X...X...X..X.X..";
+	seq.vecChannel.at(1).sbeat = L"..X...X...X...X.";
+	seq.vecChannel.at(2).sbeat = L"X.X.X.X.X.X.X.XX";
 
 	while (1)
 	{
+
+		/*// Update Timing =================================================================
+
+		clock_real_time = chrono::high_resolution_clock::now();
+		auto time_last_loop = clock_real_time - clock_old_time;
+		clock_old_time = clock_real_time;
+		dElapsedTime = chrono::duration<double>(time_last_loop).count();
+		dWallTime += dElapsedTime;
+		double dTimeNow = sound.GetTime();
+
+		// sequencer (generate and remove Notes depending on key state =========================
+
+		int newNotes = seq.update(dElapsedTime);
+		muxNotes.lock();
+
+		for (int i = 0; i < newNotes; i++) {
+			seq.vecNotes[i].on = dTimeNow;
+			vecNotes.emplace_back(seq.vecNotes[i]);
+		}
+		muxNotes.unlock();*/
+
 		for (int k = 0; k < 16; k++)
 		{
 			short nKeyState = GetAsyncKeyState((unsigned char)("ZSXCFVGBNJMK\xbcL\xbe\xbf"[k]));
@@ -315,7 +349,7 @@ int main()
 					Note n;
 					n.id = k;
 					n.on = dTimeNow;
-					n.channel = 4;
+					n.channel = 3;
 					n.isActive = true;
 
 					// Add note to vector
