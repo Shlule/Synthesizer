@@ -133,8 +133,11 @@ public:
 				sDevices.push_back(woc.szPname);
 		return sDevices;
 	}
+	void setUserFunction(std::function<double(int, double )> func) {
+		m_userFunction = func;
+	}
 
-	void SetUserFunction(FTYPE(*func)(int, FTYPE))
+	void SetUserFunctionOld(FTYPE(*func)(int, FTYPE))
 	{
 		m_userFunction = func;
 	}
@@ -150,6 +153,7 @@ public:
 
 private:
 	FTYPE(*m_userFunction)(int, FTYPE);
+	//std::function<double(int, double)> m_userFunction;
 
 	unsigned int m_nSampleRate;
 	unsigned int m_nChannels;

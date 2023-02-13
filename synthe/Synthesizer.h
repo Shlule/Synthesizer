@@ -11,7 +11,7 @@ using std::vector;
 class Synthesizer
 {
 public:
-	Synthesizer();
+	Synthesizer() {};
 
 	double MakeNoise(int nChannelP, double dTimeP);
 

@@ -142,6 +142,7 @@
   <ItemGroup>
     <ClCompile Include="EnveloppeADSR.cpp" />
     <ClCompile Include="InstrumentBase.cpp" />
+    <ClCompile Include="InstrumentBell.cpp" />
     <ClCompile Include="InstrumentDrumhithat.cpp" />
     <ClCompile Include="InstrumentDrumkick.cpp" />
     <ClCompile Include="InstrumentDrumsnare.cpp" />
@@ -154,6 +155,7 @@
   <ItemGroup>
     <ClInclude Include="EnveloppeADSR.h" />
     <ClInclude Include="InstrumentBase.h" />
+    <ClInclude Include="InstrumentBell.h" />
     <ClInclude Include="InstrumentDrumhithat.h" />
     <ClInclude Include="InstrumentDrumkick.h" />
     <ClInclude Include="InstrumentDrumsnare.h" />

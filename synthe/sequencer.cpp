@@ -24,9 +24,10 @@ int Sequencer::update(double dElapsedTimeP) {
 				Note n;
 				n.instChannel = vecChannel[c].instrument;
 				n.isActive = true;
-				n.id = 64;
+				n.id = 1;
 				vecNotes.emplace_back(n);
 			}
+			c++;
 		}
 
 	}

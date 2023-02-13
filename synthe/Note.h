@@ -4,7 +4,7 @@ class Note
 {
 public:
 	Note() {}
-	Note(int idP, int channelP);
+	Note(int idP);
 	
 	void setInstChannel(InstrumentBase* instP);
 

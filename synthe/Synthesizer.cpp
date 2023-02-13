@@ -23,11 +23,15 @@ double Synthesizer::MakeNoise(int nChannelP, double dTimeP) {
 	for (auto& n : vecNote) {
 		bool bNoteFinished = false;
 		double dSound = 0;
-
-		dSound = harmonica.sound(dTimeP, n, bNoteFinished)*0.5;
+		if (n.channel == 1) {
+			dSound = harmonica.sound(dTimeP, n, bNoteFinished) * 0.5;
+		}
 
 		dMixedOutput += dSound;
 
+		if (bNoteFinished && n.off > n.on) {
+			n.isActive = false;
+		}
 	}
 
 	safe_remove<std::vector <Note>>(vecNote, [](Note const& item) {return item.isActive; });
